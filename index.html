@@ -101,7 +101,6 @@
   .why.good{background:var(--teal-soft);color:var(--teal-deep)}
   .why.bad{background:var(--alert-soft);color:#7a3418}
   .why .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px;opacity:.8}
-
   /* interventions */
   .ivlist{display:grid;gap:10px;margin-top:20px}
   .iv{display:flex;gap:13px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);
@@ -185,16 +184,17 @@
           <div class="pt-id">
             <div class="pt-avatar" id="pt-avatar"></div>
             <div>
-              <div class="pt-name" id="pt-name"></div>
-              <div class="pt-sub" id="pt-sub"></div>
-            </div>
+              <div class="pt-name
+                            </div>
           </div>
         </div>
+
         <div class="panel">
           <h3>Subjective findings</h3>
           <ul class="findings" id="findings"></ul>
           <div id="findings-empty" class="empty-note">Interview the patient to gather findings.</div>
         </div>
+
         <div class="panel">
           <h3>SINSS readout</h3>
           <div class="sinss-read" id="sinss-read"></div>
@@ -202,7 +202,6 @@
       </aside>
     </div>
   </section>
-
   <section id="debrief" class="hidden">
     <div class="eyebrow"><span class="tick"></span>Session Debrief</div>
     <div class="verdict" style="margin-top:18px">
@@ -225,12 +224,7 @@
 
   <div class="footer" id="foot"></div>
 </div>
-
 <script>
-/* =====================================================================
-   ▼▼▼  CASE START — replace this object to build a new SINSS case.
-        Ortho scenarios only (no neuro) for this student group.
-   ===================================================================== */
 const SINSS_CASE = {
   meta: {
     number: "S2",
@@ -444,9 +438,8 @@ function renderPOC(s){
         ${p.fields.map(f=>`<div class="note-row"><div class="lab">${f.lab}</div><div class="val">${f.val}</div></div>`).join("")}
         <div class="note-row"><div class="lab">Objective</div><div class="val"><ul>${obj}</ul></div></div>
         <div class="note-row"><div class="lab">Short-term goals</div><div class="val">${p.stg.join("<br>")}</div></div>
-        <div class="note-row"><div class="lab">Long-term goals</div><div class="val">${p.ltg.join("<br>")}</div></div>
-        <div class="note-row"><div class="lab">Treatment plan</div><div class="val"><ul>${plan}</ul></div></div>
-      </div>
+        <div class="note-row"><div class="lab">Long-term goals</div>
+              </div>
     </div>
     <div class="start-row"><button class="btn" onclick="next()">Interview the patient →</button></div>`;
 }
@@ -474,11 +467,11 @@ function renderInterview(s){
     g.appendChild(b);
   });
 }
-
 function addFinding(dim, text){
   state.findings.push({dim, text});
   renderFindings();
 }
+
 function renderFindings(){
   const ul = $("findings");
   ul.innerHTML = "";
@@ -502,7 +495,6 @@ function renderSinssRead(){
     box.appendChild(r);
   });
 }
-
 function renderSinss(s){
   s.innerHTML = `
     <div class="phase-tag">Phase 3 · Classify</div>
@@ -530,7 +522,7 @@ function renderSinss(s){
 
 function pickSinss(idx, opt, btn){
   const d = SINSS_CASE.sinss[idx];
-  if(state.sinssPicks[d.key]) return; // lock first answer
+  if(state.sinssPicks[d.key]) return;
   state.sinssPicks[d.key] = opt;
   const correct = opt === d.correct;
   const opts = $(`opts-${idx}`).children;
@@ -546,7 +538,6 @@ function pickSinss(idx, opt, btn){
   renderSinssRead();
   if(Object.keys(state.sinssPicks).length === SINSS_CASE.sinss.length) $("toIv").disabled = false;
 }
-
 function renderInterventions(s){
   const iv = SINSS_CASE.interventions;
   s.innerHTML = `
@@ -562,8 +553,15 @@ function renderInterventions(s){
     row.innerHTML = `<div class="box">${state.ivPicks.has(i)?"✓":""}</div><div class="txt">${it.label}</div>`;
     row.onclick = () => {
       if(row.classList.contains("graded")) return;
-      if(state.ivPicks.has(i)){ state.ivPicks.delete(i); row.classList.remove("sel"); row.querySelector(".box").textContent=""; }
-      else { state.ivPicks.add(i); row.classList.add("sel"); row.querySelector(".box").textContent="✓"; }
+      if(state.ivPicks.has(i)){
+        state.ivPicks.delete(i);
+        row.classList.remove("sel");
+        row.querySelector(".box").textContent="";
+      } else {
+        state.ivPicks.add(i);
+        row.classList.add("sel");
+        row.querySelector(".box").textContent="✓";
+      }
     };
     list.appendChild(row);
   });
@@ -578,45 +576,77 @@ function scorePlan(){
     const right = shouldPick === picked;
     const row = rows[i];
     row.classList.add("graded", right?"ok":"err");
-    const vlabel = it.verdict==="perform" ? "Appropriate today"
-      : it.verdict==="report" ? "Report before progressing"
+
+    const vlabel = it.verdict==="perform"
+      ? "Appropriate today"
+      : it.verdict==="report"
+      ? "Report before progressing"
       : "Hold for today";
+
     const tag = document.createElement("span");
     tag.className = "verdict";
     tag.style.color = right ? "var(--teal-deep)" : "var(--alert)";
     tag.textContent = (picked?"You selected · ":"You held · ") + vlabel;
+
     const fb = document.createElement("div");
-    fb.className = "fb"; fb.textContent = it.why;
-    row.appendChild(tag); row.appendChild(fb);
+    fb.className = "fb";
+    fb.textContent = it.why;
+
+    row.appendChild(tag);
+    row.appendChild(fb);
     row.onclick = null;
   });
+
   $("scoreBtn").textContent = "See debrief →";
   $("scoreBtn").onclick = toDebrief;
 }
-
-function next(){ state.phase++; renderPhase(); document.querySelector('.scene').scrollIntoView({behavior:'smooth',block:'start'}); }
+function next(){
+  state.phase++;
+  renderPhase();
+  document.querySelector('.scene').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
 function toDebrief(){
-  const sinssCorrect = SINSS_CASE.sinss.filter(d => state.sinssPicks[d.key]===d.correct).length;
+  const sinssCorrect = SINSS_CASE.sinss.filter(
+    d => state.sinssPicks[d.key] === d.correct
+  ).length;
+
   const iv = SINSS_CASE.interventions;
   let ivCorrect = 0, reportItem = -1;
+
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform"||it.verdict==="report";
+    const shouldPick = it.verdict==="perform" || it.verdict==="report";
     if(shouldPick === state.ivPicks.has(i)) ivCorrect++;
     if(it.verdict==="report") reportItem = i;
   });
-  const reported = reportItem>=0 && state.ivPicks.has(reportItem);
-  $("d-sinss").textContent = sinssCorrect + "/" + SINSS_CASE.sinss.length;
-  $("d-iv").textContent = ivCorrect + "/" + iv.items.length;
+
+  const reported = reportItem >= 0 && state.ivPicks.has(reportItem);
+
+  $("d-sinss").textContent = `${sinssCorrect}/${SINSS_CASE.sinss.length}`;
+  $("d-iv").textContent = `${ivCorrect}/${iv.items.length}`;
   $("d-flag").textContent = reported ? "Yes" : "No";
-  const allSinss = sinssCorrect===SINSS_CASE.sinss.length;
-  $("d-title").textContent = (allSinss && ivCorrect===iv.items.length)
-    ? "You matched the treatment to the patient."
-    : (reported ? "Solid reasoning — a few calls to revisit." : "Good start — mind the status before you progress.");
+
+  const allSinss = sinssCorrect === SINSS_CASE.sinss.length;
+
+  $("d-title").textContent =
+    (allSinss && ivCorrect===iv.items.length)
+      ? "You matched the treatment to the patient."
+      : (reported
+          ? "Solid reasoning — a few calls to revisit."
+          : "Good start — mind the status before you progress.");
+
   $("e-head").textContent = SINSS_CASE.expert.heading;
-  const body = $("e-body"); body.innerHTML = "";
-  SINSS_CASE.expert.paragraphs.forEach(t => { const p=document.createElement("p"); p.innerHTML=t; body.appendChild(p); });
-  show("debrief"); scrollTop();
+
+  const body = $("e-body");
+  body.innerHTML = "";
+  SINSS_CASE.expert.paragraphs.forEach(t => {
+    const p = document.createElement("p");
+    p.innerHTML = t;
+    body.appendChild(p);
+  });
+
+  show("debrief");
+  scrollTop();
 }
 
 boot();
