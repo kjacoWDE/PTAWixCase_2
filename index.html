@@ -218,7 +218,7 @@
    ▼▼▼  CASE START — replace this object to build a new SINSS case.
         Ortho scenarios only (no neuro) for this student group.
    ===================================================================== */
-const SINSS_CASE = {
+const DEFAULT_SINSS_CASE = {
   meta: {
     number: "S1",
     kicker: "PTA Clinical Reasoning · SINSS",
@@ -259,7 +259,7 @@ const SINSS_CASE = {
     { dim:"Severity",   q:"How would you rate your pain right now, and at its worst today?", a:"“Sitting here, maybe a 4. When I'm up walking on it, it climbs to about a 6.”" },
     { dim:"Irritability", q:"When it flares up, how long does it take to settle back down?", a:"“Pretty quick to hurt once I'm on it — and then it aches for a couple of hours even after I sit[...]" },
     { dim:"Irritability", q:"Has anything set it off recently?", a:"“Honestly, I tried to jog on it at the weekend. Felt okay during, but it's been more swollen and sore since.”" },
-    { dim:"Nature",     q:"How would you describe the pain — and any numbness, tingling, or shooting?", a:"“It's a deep ache right around the outside of the ankle. No pins and needles, nothing sho[...]" },
+    { dim:"Nature",     q:"How would you describe the pain — and any numbness, tingling, or shooting?", a:"“It's a deep ache right around the outside of the ankle. No pins and needles, nothin[...]" },
     { dim:"Stability",  q:"Compared with last week, is it better, the same, or worse?", a:"“It was steadily getting better… until the jog. Since then it's gone backwards a bit.”" },
     { dim:"Stage",      q:"Remind me exactly when the injury happened?", a:"“Six days ago, in my Sunday league game.”" },
     { dim:"Screen",     q:"Any new numbness, giving way, or trouble putting weight through it at all?", a:"“No giving way, and I can bear weight — it just complains when I do too much.”" }
@@ -308,11 +308,41 @@ const SINSS_CASE = {
   expert: {
     heading: "How the reasoning fits together",
     paragraphs: [
-      "The plan of care isn't wrong — it's a sound progression. The skill is recognising that a written plan describes the <em>arc</em>, while SINSS tells you where the patient is <em>today</em>. He[...]",
-      "Irritability is the value that most directly governs dosage: high irritability means less provocation, lower load, pain-free only. Pair that with an acute, worsening status and the aggressive i[...]"
+      "The plan of care isn't wrong — it's a sound progression. The skill is recognising that a written plan describes the <em>arc</em>, while SINSS tells you where the patient is <em>today</em[...]",
+      "Irritability is the value that most directly governs dosage: high irritability means less provocation, lower load, pain-free only. Pair that with an acute, worsening status and the aggress[...]"
     ]
   }
 };
+
+// We'll attempt to load a case JSON from the cases/ folder based on the URL querystring.
+// Usage: index.html?case=S2  or index.html?case=2
+let SINSS_CASE = DEFAULT_SINSS_CASE; // fallback
+
+async function loadCaseFromQuery(){
+  const params = new URLSearchParams(window.location.search);
+  let caseId = params.get('case') || params.get('caseId') || (DEFAULT_SINSS_CASE && DEFAULT_SINSS_CASE.meta && DEFAULT_SINSS_CASE.meta.number) || 'S1';
+  if(/^[0-9]+$/.test(caseId)) caseId = 'S' + caseId; // allow ?case=2
+  // Normalize to alphanumeric (basic safety)
+  caseId = caseId.replace(/[^a-zA-Z0-9_-]/g,'');
+  const url = `cases/${caseId}.json`;
+  try{
+    const res = await fetch(url, {cache: 'no-cache'});
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    // If the fetched JSON contains the case object directly, use it. Otherwise fallback.
+    if(data && data.meta) {
+      SINSS_CASE = data;
+    } else {
+      console.warn('Loaded JSON did not contain expected case object; using default.');
+      SINSS_CASE = DEFAULT_SINSS_CASE;
+    }
+  }catch(err){
+    console.warn('Failed to load case from', url, err);
+    SINSS_CASE = DEFAULT_SINSS_CASE;
+  }
+  boot();
+}
+
 /* =====================================================================
    ▲▲▲  CASE END — engine below; leave it alone.
    ===================================================================== */
@@ -556,7 +586,9 @@ function toDebrief(){
   show("debrief"); scrollTop();
 }
 
-boot();
+// Start by attempting to load a case JSON, then boot the UI.
+loadCaseFromQuery();
+
 </script>
 </body>
 </html>
