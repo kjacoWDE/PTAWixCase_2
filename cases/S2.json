@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "number": "S2",
+    "kicker": "PTA Clinical Reasoning · SINSS",
+    "title": "Post‑op ACL Reconstruction (Right Knee) — 14 days",
+    "duration": "~10 minutes · interview · classify · treat",
+    "patient": { "initials": "JM", "name": "Jordan Miller", "subtitle": "27 · software developer" }
+  },
+  "poc": {
+    "label": "Plan of Care · ACL reconstruction (hamstring autograft), 14 days post‑op",
+    "dx": "Right ACL reconstruction with hamstring autograft — early post‑op phase",
+    "fields": [
+      { "lab": "Mechanism", "val": "Non‑contact pivot injury during soccer; ACL reconstruction 14 days ago (hamstring autograft)." },
+      { "lab": "Subjective", "val": "Pain 4/10 at rest, up to 6/10 with weight bearing; difficulty with stairs; goal = return to recreational soccer." }
+    ],
+    "objective": [
+      "AROM R knee: 0���10–65° (limited extension and flexion)",
+      "AROM L knee: 0–135°",
+      "PROM R knee: 0–5–75°",
+      "PROM L knee: 0–140°",
+      "MMT: quadriceps R 2/5 (pain/activation deficit)",
+      "Sensory intact except ~3×3 cm numbness lateral to incision",
+      "Antalgic gait with 2 axillary crutches (modified independent)",
+      "Moderate effusion (mid‑patella girth ~3 cm > left)",
+      "Palpation: medial joint line tenderness; hamstring donor site tender",
+      "Hamstring length limited; patellar superior glide hypomobile"
+    ],
+    "stg": [
+      "Knee extension to 0° and flexion to 110°",
+      "Swelling reduction to <1 cm difference",
+      "Independent ambulation 300 ft without pain/compensation"
+    ],
+    "ltg": [
+      "Quadriceps strength ≥ 4+/5",
+      "Jog without pain 1 mile; return to recreational soccer (~4–6 months depending on progress)"
+    ],
+    "plan": [
+      "Therapeutic exercise: quad activation, pain‑free ROM, progressive strengthening",
+      "Therapeutic activity: progress weight bearing and gait training",
+      "Manual therapy: patellar mobility, soft tissue at hamstring donor site",
+      "Neuromuscular reeducation: early balance & motor control",
+      "Electrical stimulation: NMES to facilitate quadriceps recruitment",
+      "Gait training: normalize stance and heel strike; remove crutches as able"
+    ]
+  },
+  "interview": [
+    { "dim": "Severity", "q": "On a 0–10 scale, what is your pain right now and when you're up walking or going up stairs?", "a": "About a 4 at rest, climbs to around a 6 when I try to bear weight or use stairs." },
+    { "dim": "Irritability", "q": "When it flares up after activity, how long does it take to settle or calm down?", "a": "It usually stays sore for a few hours after I walk a lot — the swelling seems worse the rest of the day." },
+    { "dim": "Nature", "q": "Describe the pain — is it sharp, aching, burning, numbness, or anything unusual?", "a": "Mostly a deep ache around the knee and some numbness next to the incision where the graft was taken." },
+    { "dim": "Stability", "q": "Compared with last week, is your knee better, the same, or worse? Any new giving way?", "a": "It's about the same or maybe a little stiffer; no giving way but I can't fully trust it yet." },
+    { "dim": "Stage", "q": "When was your surgery and how has recovery been since then?", "a": "Two weeks ago; I had expected smoother progress but it's been slower — still swollen and I need crutches." },
+    { "dim": "Screen", "q": "Any new redness, increased warmth, fever, numbness spreading, or calf pain?", "a": "No fever. The area around the incision is numb, but no spreading numbness or calf pain." },
+    { "dim": "Function", "q": "What activities are you able to do now and what are you avoiding?", "a": "I can get around short distances with crutches; stairs are hard and I avoid long walks or work‑outs." }
+  ],
+  "sinss": [
+    {
+      "letter": "S",
+      "key": "Severity",
+      "prompt": "How severe is the pain right now?",
+      "options": ["Low", "Moderate", "High"],
+      "correct": "Moderate",
+      "why": "Reported pain 4/10 at rest and up to 6/10 with activity fits the moderate band; intensity is sufficient to limit function but not maximal."
+    },
+    {
+      "letter": "I",
+      "key": "Irritability",
+      "prompt": "How irritable is the condition (how easily provoked and how long to settle)?",
+      "options": ["Low", "Moderate", "High"],
+      "correct": "Moderate",
+      "why": "Symptoms increase with weight‑bearing and require hours to settle; there is moderate irritability consistent with early post‑op inflammation rather than extreme instability."
+    },
+    {
+      "letter": "N",
+      "key": "Nature",
+      "prompt": "What is the nature of the problem?",
+      "options": ["Nociceptive", "Neuropathic", "Nociplastic"],
+      "correct": "Nociceptive",
+      "why": "A primarily nociceptive presentation is expected after recent surgery and graft harvest; the small localized numb patch likely represents a superficial sensory disturbance rather than a neuropathic pain syndrome."
+    },
+    {
+      "letter": "S",
+      "key": "Stability",
+      "prompt": "How is the condition progressing compared with before?",
+      "options": ["Improving", "Same", "Worsening"],
+      "correct": "Same",
+      "why": "At two weeks post‑op, limited ROM, effusion, and difficulty with ambulation suggest recovery is in the early phase and currently plateaued rather than clearly improving."
+    },
+    {
+      "letter": "S",
+      "key": "Stage",
+      "prompt": "What stage is the condition?",
+      "options": ["Acute", "Subacute", "Chronic"],
+      "correct": "Acute",
+      "why": "At 14 days post‑op the knee is in the acute to early subacute transition, and classifying as acute focuses management on protection, swelling control, and gentle activation."
+    }
+  ],
+  "interventions": {
+    "prompt": "Given his status today (moderate pain, moderate irritability, limited ROM, moderate effusion), select only the interventions appropriate for this visit.",
+    "items": [
+      {
+        "label": "Cryotherapy and compression to control effusion and pain",
+        "verdict": "perform",
+        "why": "Low‑risk, reduces swelling and pain to allow participation in therapeutic exercise; appropriate in early rehab."
+      },
+      {
+        "label": "Pain‑free active range of motion (PROM/AROM within tolerance) to restore extension and flexion",
+        "verdict": "perform",
+        "why": "Gentle ROM promotes mobility and prevents stiffness while avoiding aggressive end‑range loading that could aggravate the graft."
+      },
+      {
+        "label": "Neuromuscular electrical stimulation (NMES) to the quadriceps to facilitate activation",
+        "verdict": "perform",
+        "why": "Useful for early quadriceps recruitment when volitional contraction is limited; adjunct to volitional practice."
+      },
+      {
+        "label": "Gentle patellar mobilizations and soft‑tissue work around hamstring donor site",
+        "verdict": "perform",
+        "why": "Addresses hypomobile patella and donor‑site restrictions that limit ROM and functional recovery."
+      },
+      {
+        "label": "Progressive weight‑bearing and gait training with focus on normalized stance/heel strike (as tolerated)",
+        "verdict": "perform",
+        "why": "Important functional training to reduce compensations and improve ambulation; progress crutch reduction as safety and pain allow."
+      },
+      {
+        "label": "Isolated heavy resisted open‑chain knee extension (high load) or plyometrics",
+        "verdict": "hold",
+        "why": "High‑load or impact activities are inappropriate at 14 days post‑op with moderate effusion and limited quadriceps control — hold until inflammation and strength improve."
+      },
+      {
+        "label": "Begin high‑speed eccentric / sport‑specific drills (cutting/plyometrics)",
+        "verdict": "hold",
+        "why": "Too aggressive for early rehab phase; premature progression risks graft overload and flare."
+      }
+    ]
+  },
+  "expert": {
+    "heading": "How the reasoning fits together",
+    "paragraphs": [
+      "Early ACL rehabilitation balances protection of healing tissues with preventing stiffness and strength loss. At two weeks, the correct emphasis is swelling control, gentle ROM, and restoring quadriceps activation rather than pushing high‑load strengthening or sport drills.",
+      "Irritability and effusion guide dosage: moderate irritability means within‑tolerance, low‑load interventions. Reporting is essential for any change suggesting infection, neurovascular compromise, or a clear deterioration in trajectory."
+    ]
+  },
+  "soapKey": {
+    "subjective": "Pain 4/10 at rest, 6/10 with WB; difficulty with stairs",
+    "objective": "AROM R 0–10–65°; AROM L 0–135°; PROM R 0–5–75°; PROM L 0–140°; quad 2/5; moderate effusion; antalgic gait with 2 crutches",
+    "assessment": "Early post‑op ACL reconstruction with limited quad activation, ROM loss, and moderate effusion",
+    "plan": "Cryotherapy, pain‑free ROM, NMES for quad activation, patellar mobilization, gait training"
+  },
+  "settings": {
+    "allowInstructorMode": true,
+    "drafTnote": "DRAFT — clinician review required before publishing"
+  }
+}
