@@ -615,7 +615,7 @@ function toDebrief(){
   let ivCorrect = 0, reportItem = -1;
 
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform" || it.verdict==="report";
+   const shouldPick = it.verdict === "perform";
     if(shouldPick === state.ivPicks.has(i)) ivCorrect++;
     if(it.verdict==="report") reportItem = i;
   });
