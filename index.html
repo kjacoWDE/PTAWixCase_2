@@ -571,7 +571,7 @@ function scorePlan(){
   const iv = SINSS_CASE.interventions;
   const rows = $("ivlist").children;
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform" || it.verdict==="report";
+    const shouldPick = it.verdict==="perform";
     const picked = state.ivPicks.has(i);
     const right = shouldPick === picked;
     const row = rows[i];
