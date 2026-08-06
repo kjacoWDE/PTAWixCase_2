@@ -72,15 +72,8 @@
     display:flex;justify-content:space-between;gap:12px;align-items:center}
   .qbtn:hover{border-color:var(--teal);background:#fff}
   .qbtn:disabled{opacity:.5;cursor:default;background:var(--surface)}
-  .qbtn .dim{
-    display:none;
-    font-family:"IBM Plex Mono",monospace;
-    font-size:10px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--teal);
-    flex:0 0 auto;
-  }
+  .qbtn .dim{display:none; font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--teal);flex:0 0 auto}
 
   /* SINSS segmented */
   .sinss-q{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
@@ -183,9 +176,7 @@
           <h3>Patient</h3>
           <div class="pt-id">
             <div class="pt-avatar" id="pt-avatar"></div>
-            <div>
-              <div class="pt-name
-                            </div>
+            <div><div class="pt-name" id="pt-name"></div><div class="pt-sub" id="pt-sub"></div></div>
           </div>
         </div>
 
@@ -230,7 +221,7 @@ const SINSS_CASE = {
     number: "S2",
     kicker: "PTA Clinical Reasoning · SINSS",
     title: "ACL Reconstruction — Early Rehab Check-In",
-    lede: "You're the PTA progressing a patient 10 days after ACL reconstruction. Interview her to determine her SINSS status today, then choose only the interventions appropriate for her irritability, stage, and stability.",
+    lede: "You're the PTA progressing a patient 10 days after ACL reconstruction. Interview her to determine her SINSS status today, then choose only the interventions appropriate for her irritability and stage.",
     duration: "~10 minutes · interview · classify · treat",
     patient: { initials: "KM", name: "Kelsey M.", subtitle: "32 · recreational runner" }
   },
@@ -270,12 +261,12 @@ const SINSS_CASE = {
   },
 
   interview: [
-    { dim:"Severity", q:"How would you rate your pain today?", a:"“Maybe a 3/10 sitting, but closer to 5/10 when I bend it past about 60 degrees.”" },
-    { dim:"Irritability", q:"When it hurts, how long does it take to settle?", a:"“If I push it too far, it throbs for an hour or two.”" },
-    { dim:"Nature", q:"Describe the pain — sharp, dull, pressure, any numbness?", a:"“Mostly a tight, pressured feeling around the kneecap. No numbness or shooting pain.”" },
-    { dim:"Stability", q:"Compared to last week, better, same, or worse?", a:"“Better overall — swelling is down and I can bend it a little more.”" },
-    { dim:"Stage", q:"Remind me how long ago the surgery was?", a:"“Ten days.”" },
-    { dim:"Screen", q:"Any new giving way, locking, fever, or calf pain?", a:"“No giving way or locking. Everything seems normal.”" }
+    { dim:"Severity", q:"How would you rate your pain today?", a:""Maybe a 3/10 sitting, but closer to 5/10 when I bend it past about 60 degrees."" },
+    { dim:"Irritability", q:"When it hurts, how long does it take to settle?", a:""If I push it too far, it throbs for an hour or two."" },
+    { dim:"Nature", q:"Describe the pain — sharp, dull, pressure, any numbness?", a:""Mostly a tight, pressured feeling around the kneecap. No numbness or shooting pain."" },
+    { dim:"Stability", q:"Compared to last week, better, same, or worse?", a:""Better overall — swelling is down and I can bend it a little more."" },
+    { dim:"Stage", q:"Remind me how long ago the surgery was?", a:""Ten days."" },
+    { dim:"Screen", q:"Any new giving way, locking, fever, or calf pain?", a:""No giving way or locking. Everything seems normal."" }
   ],
 
   sinss: [
@@ -365,7 +356,7 @@ const SINSS_CASE = {
   expert: {
     heading: "How the reasoning fits together",
     paragraphs: [
-      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or strain.",
+      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes sharp pain.",
       "Quad activation and protected ROM are the highest priorities. Avoid open-chain terminal extension and deep closed-chain flexion — both increase anterior shear forces on the graft."
     ]
   }
@@ -438,8 +429,9 @@ function renderPOC(s){
         ${p.fields.map(f=>`<div class="note-row"><div class="lab">${f.lab}</div><div class="val">${f.val}</div></div>`).join("")}
         <div class="note-row"><div class="lab">Objective</div><div class="val"><ul>${obj}</ul></div></div>
         <div class="note-row"><div class="lab">Short-term goals</div><div class="val">${p.stg.join("<br>")}</div></div>
-        <div class="note-row"><div class="lab">Long-term goals</div>
-              </div>
+        <div class="note-row"><div class="lab">Long-term goals</div><div class="val">${p.ltg.join("<br>")}</div></div>
+        <div class="note-row"><div class="lab">Treatment plan</div><div class="val"><ul>${plan}</ul></div></div>
+      </div>
     </div>
     <div class="start-row"><button class="btn" onclick="next()">Interview the patient →</button></div>`;
 }
@@ -571,7 +563,7 @@ function scorePlan(){
   const iv = SINSS_CASE.interventions;
   const rows = $("ivlist").children;
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform";
+    const shouldPick = it.verdict==="perform"||it.verdict==="report";
     const picked = state.ivPicks.has(i);
     const right = shouldPick === picked;
     const row = rows[i];
@@ -615,7 +607,7 @@ function toDebrief(){
   let ivCorrect = 0, reportItem = -1;
 
   iv.items.forEach((it,i) => {
-   const shouldPick = it.verdict === "perform";
+    const shouldPick = it.verdict==="perform"||it.verdict==="report";
     if(shouldPick === state.ivPicks.has(i)) ivCorrect++;
     if(it.verdict==="report") reportItem = i;
   });
