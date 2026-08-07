@@ -36,14 +36,11 @@
   .btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
   .start-row{margin-top:28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
   .start-row .meta{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
-
-  /* progress rail */
   .rail{display:flex;gap:8px;margin-top:26px;flex-wrap:wrap}
   .rail .seg{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px;background:var(--surface)}
   .rail .seg.on{background:var(--teal);color:#fff;border-color:var(--teal)}
   .rail .seg.done{background:var(--teal-soft);color:var(--teal-deep);border-color:var(--teal-soft)}
-
   .stage{display:grid;grid-template-columns:1fr 340px;gap:26px;margin-top:24px;align-items:start}
   @media(max-width:860px){.stage{grid-template-columns:1fr}}
   .scene{background:var(--surface);border:1px solid var(--line);border-radius:18px;
@@ -51,8 +48,6 @@
   .phase-tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .phase-title{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(20px,3vw,27px);line-height:1.15;margin-top:8px}
   .phase-sub{color:var(--muted);font-size:14.5px;margin-top:10px;max-width:56ch}
-
-  /* POC note */
   .note{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
   .note-head{background:var(--teal-deep);color:#EAF1EE;padding:14px 18px;font-family:"IBM Plex Mono",monospace;
     font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -64,8 +59,6 @@
     text-transform:uppercase;color:var(--muted);padding-top:2px}
   .note-row .val{flex:1}
   .note-row .val ul{margin:0;padding-left:18px} .note-row .val li{margin:2px 0}
-
-  /* interview */
   .qgrid{display:grid;gap:10px;margin-top:20px}
   .qbtn{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px;
     font-size:14.5px;font-family:inherit;color:var(--ink);cursor:pointer;transition:border-color .16s,background .16s;
@@ -74,8 +67,6 @@
   .qbtn:disabled{opacity:.5;cursor:default;background:var(--surface)}
   .qbtn .dim{display:none; font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--teal);flex:0 0 auto}
-
-  /* SINSS segmented */
   .sinss-q{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
   .sinss-q:first-child{border-top:none;padding-top:0;margin-top:12px}
   .sinss-q .letter{font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:var(--teal-deep);
@@ -94,7 +85,6 @@
   .why.good{background:var(--teal-soft);color:var(--teal-deep)}
   .why.bad{background:var(--alert-soft);color:#7a3418}
   .why .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px;opacity:.8}
-  /* interventions */
   .ivlist{display:grid;gap:10px;margin-top:20px}
   .iv{display:flex;gap:13px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);
     border-radius:11px;padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s}
@@ -110,8 +100,6 @@
   .iv .verdict{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
     margin-top:7px;display:block}
   .iv .fb{font-size:13px;color:var(--ink);margin-top:6px;line-height:1.45}
-
-  /* side chart */
   .chart{position:sticky;top:24px;display:grid;gap:16px}
   @media(max-width:860px){.chart{position:static}}
   .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;box-shadow:var(--shadow)}
@@ -134,8 +122,6 @@
   .sinss-read .r .rk{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   .sinss-read .r .rv{font-weight:600;color:var(--teal-deep)}
   .sinss-read .r .rv.blank{color:#C0C8C3;font-weight:400;font-style:italic}
-
-  /* debrief */
   .verdict{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,4vw,36px);box-shadow:var(--shadow)}
   .verdict h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(23px,4vw,32px);line-height:1.12;margin-top:6px}
   .score-strip{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
@@ -145,7 +131,6 @@
   .expert h3{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9DC3BC;margin-bottom:14px}
   .expert p{font-size:15px;line-height:1.62;max-width:64ch} .expert p+p{margin-top:12px}
   .expert em{font-style:italic;border-bottom:1px solid #4C736E}
-
   .footer{margin-top:34px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.1em;color:var(--muted)}
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -155,7 +140,6 @@
 
 <body>
 <div class="wrap">
-
   <section id="intro">
     <div class="eyebrow"><span class="tick"></span><span id="i-kicker"></span></div>
     <h1 id="i-title"></h1>
@@ -179,13 +163,11 @@
             <div><div class="pt-name" id="pt-name"></div><div class="pt-sub" id="pt-sub"></div></div>
           </div>
         </div>
-
         <div class="panel">
           <h3>Subjective findings</h3>
           <ul class="findings" id="findings"></ul>
           <div id="findings-empty" class="empty-note">Interview the patient to gather findings.</div>
         </div>
-
         <div class="panel">
           <h3>SINSS readout</h3>
           <div class="sinss-read" id="sinss-read"></div>
@@ -211,7 +193,6 @@
       <button class="btn ghost" onclick="toIntro()">Back to start</button>
     </div>
   </section>
-
   <div class="footer" id="foot"></div>
 </div>
 <script>
@@ -224,14 +205,14 @@ const SINSS_CASE = {
     duration: "~10 minutes · interview · classify · treat",
     patient: { initials: "KM", name: "Kelsey M.", subtitle: "32 · recreational runner" }
   },
-
   poc: {
     label: "Plan of Care · follow-up visit 10 days post-op",
     dx: "Right ACL reconstruction (hamstring autograft)",
     fields: [
       { lab: "Surgery date", val: "10 days ago" },
       { lab: "Precautions", val: "No open-chain knee extension 40–0°; avoid pivoting/twisting; protect graft site" },
-      { lab: "Brace", val: "Locked in extension for ambulation; unlocked for seated ROM" }
+      { lab: "Brace", val: "Locked in extension for ambulation; unlocked for seated ROM" },
+      { lab: "Mechanism of injury", val: "Non-contact pivoting injury while playing soccer" }
     ],
     objective: [
       "Edema: moderate peri-patellar swelling",
@@ -258,7 +239,6 @@ const SINSS_CASE = {
       "Closed-chain strengthening in safe ranges"
     ]
   },
-
   interview: [
     { dim:"Severity", q:"How would you rate your pain today?", a:"Maybe a 3/10 sitting, but closer to 5/10 when I bend it past about 60 degrees." },
     { dim:"Irritability", q:"When it hurts, how long does it take to settle?", a:"If I push it too far, it throbs for an hour or two." },
@@ -267,95 +247,29 @@ const SINSS_CASE = {
     { dim:"Stage", q:"Remind me how long ago the surgery was?", a:"Ten days." },
     { dim:"Screen", q:"Any new giving way, locking, fever, or calf pain?", a:"No giving way or locking. Everything seems normal." }
   ],
-
   sinss: [
-    {
-      letter:"S", key:"Severity",
-      prompt:"How severe is the pain today?",
-      options:["Mild (0–3/10)","Moderate (4–6/10)","Severe (7–10/10)"],
-      correct:"Moderate (4–6/10)",
-      why:"Pain is 3/10 at rest and 5/10 with flexion — this fits the moderate band."
-    },
-    {
-      letter:"I", key:"Irritability",
-      prompt:"How irritable is the condition?",
-      options:["Low","Moderate","High"],
-      correct:"Moderate",
-      why:"Pain increases with movement and takes 1–2 hours to settle — moderate irritability."
-    },
-    {
-      letter:"N", key:"Nature",
-      prompt:"What is the nature of the pain?",
-      options:["Nociceptive","Neuropathic","Nociplastic"],
-      correct:"Nociceptive",
-      why:"Post-surgical mechanical pain with swelling and pressure is nociceptive."
-    },
-    {
-      letter:"S", key:"Stability",
-      prompt:"How is the condition progressing?",
-      options:["Improving","Same","Worsening"],
-      correct:"Improving",
-      why:"Swelling is decreasing and ROM is increasing — clear improvement."
-    },
-    {
-      letter:"S", key:"Stage",
-      prompt:"What stage is the condition?",
-      options:["Acute (1–14 days)","Subacute (2–6 wks)","Chronic (> 6 wks)"],
-      correct:"Acute (1–14 days)",
-      why:"Ten days post-op is still within the acute healing window."
-    }
+    { letter:"S", key:"Severity", prompt:"How severe is the pain today?", options:["Mild (0–3/10)","Moderate (4–6/10)","Severe (7–10/10)"], correct:"Moderate (4–6/10)", why:"Pain is 3/10 sitting but 5/10 with flexion past 60°, placing it squarely in the moderate range." },
+    { letter:"I", key:"Irritability", prompt:"How irritable is the condition?", options:["Low","Moderate","High"], correct:"Moderate", why:"Pain increases with movement and takes 1–2 hours to settle — hallmark of moderate irritability." },
+    { letter:"N", key:"Nature", prompt:"What is the nature of the pain?", options:["Nociceptive","Neuropathic","Nociplastic"], correct:"Nociceptive", why:"Post-surgical mechanical pain with swelling, no neurological signs — clearly nociceptive." },
+    { letter:"S", key:"Stability", prompt:"How is the condition progressing?", options:["Improving","Same","Worsening"], correct:"Improving", why:"Swelling is decreasing and ROM is increasing — solid trajectory for 10 days post-op." },
+    { letter:"S", key:"Stage", prompt:"What stage is the condition?", options:["Acute (1–14 days)","Subacute (2–6 wks)","Chronic (> 6 wks)"], correct:"Acute (1–14 days)", why:"Ten days post-op falls squarely in the acute healing phase." }
   ],
-
   interventions: {
     prompt: "Choose only the interventions appropriate for a 10‑day post‑op ACL reconstruction with moderate severity, moderate irritability, improving stability, and acute stage.",
     items: [
-      {
-        label:"Cryotherapy and compression",
-        verdict:"perform",
-        why:"Edema control is essential in the acute post-op phase and well tolerated."
-      },
-      {
-        label:"Heel slides within tolerance (no forced flexion)",
-        verdict:"perform",
-        why:"Protected ROM is appropriate; avoid aggressive flexion that increases irritability."
-      },
-      {
-        label:"Quad sets + NMES",
-        verdict:"perform",
-        why:"Quad activation is a priority at this stage; safe and necessary."
-      },
-      {
-        label:"Straight-leg raises with brace locked",
-        verdict:"perform",
-        why:"SLR is safe if the brace is locked and quad activation is maintained."
-      },
-      {
-        label:"Report any signs of infection or DVT to supervising PT",
-        verdict:"hold",
-        why:"No red flags (fever, calf pain, drainage) and patient continues to improve. No need for reporting to supervising PT or MD."
-      },
-      {
-        label:"Open-chain knee extension 40–0°",
-        verdict:"hold",
-        why:"Contraindicated early post-op due to graft strain in terminal extension."
-      },
-      {
-        label:"Closed-chain strengthening beyond 45° flexion",
-        verdict:"hold",
-        why:"Deep flexion increases graft strain and anterior shear forces at this stage."
-      },
-      {
-        label:"Jogging or impact drills",
-        verdict:"hold",
-        why:"Impact loading is contraindicated in the acute phase and far too early at 10 days."
-      }
+      { label:"Cryotherapy and compression", verdict:"perform", why:"Edema control is essential in the acute post-op phase and well tolerated." },
+      { label:"Heel slides within tolerance (no forced flexion)", verdict:"perform", why:"Protected ROM is appropriate; avoid aggressive flexion that increases irritability." },
+      { label:"Quad sets + NMES", verdict:"perform", why:"Quad activation is a priority at this stage; safe and necessary." },
+      { label:"Straight-leg raises with brace locked", verdict:"perform", why:"SLR is safe if the brace is locked and quad activation is maintained." },
+      { label:"Open-chain knee extension 40–0°", verdict:"hold", why:"Contraindicated early post-op due to graft strain in terminal extension." },
+      { label:"Closed-chain strengthening beyond 45° flexion", verdict:"hold", why:"Deep flexion increases graft strain and anterior shear forces at this stage." },
+      { label:"Jogging or impact drills", verdict:"hold", why:"Impact loading is contraindicated in the acute phase and far too early at 10 days." }
     ]
   },
-
   expert: {
     heading: "How the reasoning fits together",
     paragraphs: [
-      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes sharp pain.",
+      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes prolonged pain.",
       "Quad activation and protected ROM are the highest priorities. Avoid open-chain terminal extension and deep closed-chain flexion — both increase anterior shear forces on the graft."
     ]
   }
@@ -363,11 +277,9 @@ const SINSS_CASE = {
 /* =====================================================================
    ▲▲▲  CASE END — engine below; leave it alone.
    ===================================================================== */
-
 const PHASES = ["Plan of care","Interview","Classify (SINSS)","Interventions"];
 const $ = id => document.getElementById(id);
 let state;
-
 function boot(){
   const m = SINSS_CASE.meta;
   document.title = m.title;
@@ -381,11 +293,9 @@ function boot(){
   $("pt-name").textContent = m.patient.name;
   $("pt-sub").textContent = m.patient.subtitle;
 }
-
 function toIntro(){ show("intro"); scrollTop(); }
 function show(w){ ["intro","sim","debrief"].forEach(s => $(s).classList.toggle("hidden", s!==w)); }
 function scrollTop(){ window.scrollTo({top:0,behavior:"instant"}); }
-
 function startCase(){
   state = { phase:0, asked:[], findings:[], sinssPicks:{}, ivPicks:new Set() };
   show("sim");
@@ -393,7 +303,6 @@ function startCase(){
   renderPhase();
   scrollTop();
 }
-
 function renderRail(){
   $("rail").innerHTML = "";
   PHASES.forEach((p,i) => {
@@ -403,7 +312,6 @@ function renderRail(){
     $("rail").appendChild(d);
   });
 }
-
 function renderPhase(){
   renderRail();
   const s = $("scene");
@@ -412,7 +320,6 @@ function renderPhase(){
   if(state.phase===2) return renderSinss(s);
   if(state.phase===3) return renderInterventions(s);
 }
-
 function renderPOC(s){
   const p = SINSS_CASE.poc;
   const obj = p.objective.map(o=>`<li>${o}</li>`).join("");
@@ -434,7 +341,6 @@ function renderPOC(s){
     </div>
     <div class="start-row"><button class="btn" onclick="next()">Interview the patient →</button></div>`;
 }
-
 function renderInterview(s){
   s.innerHTML = `
     <div class="phase-tag">Phase 2 · Interview</div>
@@ -462,7 +368,6 @@ function addFinding(dim, text){
   state.findings.push({dim, text});
   renderFindings();
 }
-
 function renderFindings(){
   const ul = $("findings");
   ul.innerHTML = "";
@@ -474,7 +379,6 @@ function renderFindings(){
     ul.appendChild(li);
   });
 }
-
 function renderSinssRead(){
   const box = $("sinss-read");
   box.innerHTML = "";
@@ -510,7 +414,6 @@ function renderSinss(s){
     });
   });
 }
-
 function pickSinss(idx, opt, btn){
   const d = SINSS_CASE.sinss[idx];
   if(state.sinssPicks[d.key]) return;
@@ -557,7 +460,6 @@ function renderInterventions(s){
     list.appendChild(row);
   });
 }
-
 function scorePlan(){
   const iv = SINSS_CASE.interventions;
   const rows = $("ivlist").children;
@@ -567,25 +469,20 @@ function scorePlan(){
     const right = shouldPick === picked;
     const row = rows[i];
     row.classList.add("graded", right?"ok":"err");
-
     const vlabel = it.verdict==="perform"
       ? "Appropriate today"
       : "Hold for today";
-
     const tag = document.createElement("span");
     tag.className = "verdict";
     tag.style.color = right ? "var(--teal-deep)" : "var(--alert)";
     tag.textContent = (picked?"You selected · ":"You held · ") + vlabel;
-
     const fb = document.createElement("div");
     fb.className = "fb";
     fb.textContent = it.why;
-
     row.appendChild(tag);
     row.appendChild(fb);
     row.onclick = null;
   });
-
   $("scoreBtn").textContent = "See debrief →";
   $("scoreBtn").onclick = toDebrief;
 }
@@ -594,32 +491,24 @@ function next(){
   renderPhase();
   document.querySelector('.scene').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 function toDebrief(){
   const sinssCorrect = SINSS_CASE.sinss.filter(
     d => state.sinssPicks[d.key] === d.correct
   ).length;
-
   const iv = SINSS_CASE.interventions;
   let ivCorrect = 0;
-
   iv.items.forEach((it,i) => {
     const shouldPick = it.verdict==="perform";
     if(shouldPick === state.ivPicks.has(i)) ivCorrect++;
   });
-
   $("d-sinss").textContent = `${sinssCorrect}/${SINSS_CASE.sinss.length}`;
   $("d-iv").textContent = `${ivCorrect}/${iv.items.length}`;
-
   const allSinss = sinssCorrect === SINSS_CASE.sinss.length;
-
   $("d-title").textContent =
     (allSinss && ivCorrect===iv.items.length)
       ? "You matched the treatment to the patient."
       : "Good start — revisit the SINSS profile before you progress treatment.";
-
   $("e-head").textContent = SINSS_CASE.expert.heading;
-
   const body = $("e-body");
   body.innerHTML = "";
   SINSS_CASE.expert.paragraphs.forEach(t => {
@@ -627,11 +516,9 @@ function toDebrief(){
     p.innerHTML = t;
     body.appendChild(p);
   });
-
   show("debrief");
   scrollTop();
 }
-
 boot();
 </script>
 </body>
