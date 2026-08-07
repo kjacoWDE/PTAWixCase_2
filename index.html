@@ -182,7 +182,6 @@
       <div class="score-strip">
         <div class="score-item"><div id="d-sinss" class="n"></div><div class="l">SINSS correct</div></div>
         <div class="score-item"><div id="d-iv" class="n"></div><div class="l">Interventions correct</div></div>
-        <div class="score-item"><div id="d-flag" class="n"></div><div class="l">Change reported</div></div>
       </div>
     </div>
     <div class="expert">
@@ -207,7 +206,7 @@ const SINSS_CASE = {
     patient: { initials: "KM", name: "Kelsey M.", subtitle: "32 · recreational runner" }
   },
   poc: {
-    label: "Plan of Care · initial eval 3 days post-op",
+    label: "Plan of Care · follow-up visit 10 days post-op",
     dx: "Right ACL reconstruction (hamstring autograft)",
     fields: [
       { lab: "Surgery date", val: "10 days ago" },
@@ -249,11 +248,11 @@ const SINSS_CASE = {
     { dim:"Screen", q:"Any new giving way, locking, fever, or calf pain?", a:"No giving way or locking. Everything seems normal." }
   ],
   sinss: [
-    { letter:"S", key:"Severity", prompt:"How severe is the pain today?", options:["Mild (0–3/10)","Moderate (4–6/10)","Severe (7–10/10)"], correct:"Moderate (4–6/10)", why:"Pain is 3/10 at rest and 5/10 with flexion — this fits the moderate band." },
-    { letter:"I", key:"Irritability", prompt:"How irritable is the condition?", options:["Low","Moderate","High"], correct:"Moderate", why:"Pain increases with movement and takes 1–2 hours to settle — moderate irritability." },
-    { letter:"N", key:"Nature", prompt:"What is the nature of the pain?", options:["Nociceptive","Neuropathic","Nociplastic"], correct:"Nociceptive", why:"Post-surgical mechanical pain with swelling and pressure is nociceptive." },
-    { letter:"S", key:"Stability", prompt:"How is the condition progressing?", options:["Improving","Same","Worsening"], correct:"Improving", why:"Swelling is decreasing and ROM is increasing — clear improvement." },
-    { letter:"S", key:"Stage", prompt:"What stage is the condition?", options:["Acute (1–14 days)","Subacute (2–6 wks)","Chronic (> 6 wks)"], correct:"Acute (1–14 days)", why:"Ten days post-op is still within the acute healing window." }
+    { letter:"S", key:"Severity", prompt:"How severe is the pain today?", options:["Mild (0–3/10)","Moderate (4–6/10)","Severe (7–10/10)"], correct:"Moderate (4–6/10)", why:"Pain is 3/10 sitting but 5/10 with flexion past 60°, placing it squarely in the moderate range." },
+    { letter:"I", key:"Irritability", prompt:"How irritable is the condition?", options:["Low","Moderate","High"], correct:"Moderate", why:"Pain increases with movement and takes 1–2 hours to settle — hallmark of moderate irritability." },
+    { letter:"N", key:"Nature", prompt:"What is the nature of the pain?", options:["Nociceptive","Neuropathic","Nociplastic"], correct:"Nociceptive", why:"Post-surgical mechanical pain with swelling, no neurological signs — clearly nociceptive." },
+    { letter:"S", key:"Stability", prompt:"How is the condition progressing?", options:["Improving","Same","Worsening"], correct:"Improving", why:"Swelling is decreasing and ROM is increasing — solid trajectory for 10 days post-op." },
+    { letter:"S", key:"Stage", prompt:"What stage is the condition?", options:["Acute (1–14 days)","Subacute (2–6 wks)","Chronic (> 6 wks)"], correct:"Acute (1–14 days)", why:"Ten days post-op falls squarely in the acute healing phase." }
   ],
   interventions: {
     prompt: "Choose only the interventions appropriate for a 10‑day post‑op ACL reconstruction with moderate severity, moderate irritability, improving stability, and acute stage.",
@@ -262,7 +261,6 @@ const SINSS_CASE = {
       { label:"Heel slides within tolerance (no forced flexion)", verdict:"perform", why:"Protected ROM is appropriate; avoid aggressive flexion that increases irritability." },
       { label:"Quad sets + NMES", verdict:"perform", why:"Quad activation is a priority at this stage; safe and necessary." },
       { label:"Straight-leg raises with brace locked", verdict:"perform", why:"SLR is safe if the brace is locked and quad activation is maintained." },
-      { label:"Report any signs of infection or DVT to supervising PT", verdict:"report", why:"If new red flags appear, they should be reported before progressing treatment." },
       { label:"Open-chain knee extension 40–0°", verdict:"hold", why:"Contraindicated early post-op due to graft strain in terminal extension." },
       { label:"Closed-chain strengthening beyond 45° flexion", verdict:"hold", why:"Deep flexion increases graft strain and anterior shear forces at this stage." },
       { label:"Jogging or impact drills", verdict:"hold", why:"Impact loading is contraindicated in the acute phase and far too early at 10 days." }
@@ -271,7 +269,7 @@ const SINSS_CASE = {
   expert: {
     heading: "How the reasoning fits together",
     paragraphs: [
-      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes sharp pain.",
+      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes prolonged pain.",
       "Quad activation and protected ROM are the highest priorities. Avoid open-chain terminal extension and deep closed-chain flexion — both increase anterior shear forces on the graft."
     ]
   }
@@ -466,15 +464,13 @@ function scorePlan(){
   const iv = SINSS_CASE.interventions;
   const rows = $("ivlist").children;
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform"||it.verdict==="report";
+    const shouldPick = it.verdict==="perform";
     const picked = state.ivPicks.has(i);
     const right = shouldPick === picked;
     const row = rows[i];
     row.classList.add("graded", right?"ok":"err");
     const vlabel = it.verdict==="perform"
       ? "Appropriate today"
-      : it.verdict==="report"
-      ? "Report before progressing"
       : "Hold for today";
     const tag = document.createElement("span");
     tag.className = "verdict";
@@ -500,23 +496,18 @@ function toDebrief(){
     d => state.sinssPicks[d.key] === d.correct
   ).length;
   const iv = SINSS_CASE.interventions;
-  let ivCorrect = 0, reportItem = -1;
+  let ivCorrect = 0;
   iv.items.forEach((it,i) => {
-    const shouldPick = it.verdict==="perform"||it.verdict==="report";
+    const shouldPick = it.verdict==="perform";
     if(shouldPick === state.ivPicks.has(i)) ivCorrect++;
-    if(it.verdict==="report") reportItem = i;
   });
-  const reported = reportItem >= 0 && state.ivPicks.has(reportItem);
   $("d-sinss").textContent = `${sinssCorrect}/${SINSS_CASE.sinss.length}`;
   $("d-iv").textContent = `${ivCorrect}/${iv.items.length}`;
-  $("d-flag").textContent = reported ? "Yes" : "No";
   const allSinss = sinssCorrect === SINSS_CASE.sinss.length;
   $("d-title").textContent =
     (allSinss && ivCorrect===iv.items.length)
       ? "You matched the treatment to the patient."
-      : (reported
-          ? "Solid reasoning — a few calls to revisit."
-          : "Good start — mind the status before you progress.");
+      : "Good start — revisit the SINSS profile before you progress treatment.";
   $("e-head").textContent = SINSS_CASE.expert.heading;
   const body = $("e-body");
   body.innerHTML = "";
