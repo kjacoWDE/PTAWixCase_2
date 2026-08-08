@@ -197,41 +197,57 @@
 </div>
 <script>
 const SINSS_CASE = {
-  meta: {
-    number: "S2",
-    kicker: "PTA Clinical Reasoning · SINSS",
-    title: "ACL Reconstruction — Early Rehab Check-In",
-    lede: "You're the PTA progressing a patient 10 days after ACL reconstruction. Interview her to determine her SINSS status today, then choose only the interventions appropriate for her irritability and stage.",
-    duration: "~10 minutes · interview · classify · treat",
-    patient: { initials: "KM", name: "Kelsey M.", subtitle: "32 · recreational runner" }
+  "meta": {
+    "number": "S2",
+    "kicker": "PTA Clinical Reasoning · SINSS",
+    "title": "ACL Reconstruction - Recreational Runner",
+    "lede": "You're the PTA progressing a patient 10 days after ACL reconstruction. Interview her to determine her SINSS status today, then choose only the interventions appropriate for her irritability and stage.",
+    "duration": "~10 minutes · interview · classify · treat",
+    "patient": {
+      "initials": "KM",
+      "name": "Kelsey M.",
+      "subtitle": "32 · recreational runner"
+    }
   },
-  poc: {
-    label: "Plan of Care · follow-up visit 10 days post-op",
-    dx: "Right ACL reconstruction (hamstring autograft)",
-    fields: [
-      { lab: "Surgery date", val: "10 days ago" },
-      { lab: "Precautions", val: "No open-chain knee extension 40–0°; avoid pivoting/twisting; protect graft site" },
-      { lab: "Brace", val: "Locked in extension for ambulation; unlocked for seated ROM" },
-      { lab: "Mechanism of injury", val: "Non-contact pivoting injury while playing soccer" }
+  "poc": {
+    "label": "Plan of Care · follow-up visit 10 days post-op",
+    "dx": "Right ACL reconstruction (hamstring autograft)",
+    "fields": [
+      {
+        "lab": "Surgery date",
+        "val": "10 days ago"
+      },
+      {
+        "lab": "Precautions",
+        "val": "No open-chain knee extension 40–0°; avoid pivoting/twisting; protect graft site"
+      },
+      {
+        "lab": "Brace",
+        "val": "Locked in extension for ambulation; unlocked for seated ROM"
+      },
+      {
+        "lab": "Mechanism of injury",
+        "val": "Non-contact pivoting injury while playing soccer"
+      }
     ],
-    objective: [
+    "objective": [
       "Edema: moderate peri-patellar swelling",
       "AROM: flexion 0–65°, extension lag 4°",
       "Quad activation: poor; SLR with lag",
       "Gait: WBAT with crutches, brace locked",
       "Incision: clean, dry, healing appropriately"
     ],
-    stg: [
+    "stg": [
       "Achieve full passive extension; flexion ≥ 90°",
       "Improve quad activation (no lag on SLR)",
       "Normalize gait with brace"
     ],
-    ltg: [
+    "ltg": [
       "Return to running at 12–16 weeks",
       "Hop test symmetry ≥ 90%",
       "Full strength and dynamic stability"
     ],
-    plan: [
+    "plan": [
       "Edema control (cryotherapy, compression)",
       "Protected ROM (extension first, flexion as tolerated)",
       "Quad activation (NMES, isometrics)",
@@ -239,37 +255,144 @@ const SINSS_CASE = {
       "Closed-chain strengthening in safe ranges"
     ]
   },
-  interview: [
-    { dim:"Severity", q:"How would you rate your pain today?", a:"Maybe a 3/10 sitting, but closer to 5/10 when I bend it past about 60 degrees." },
-    { dim:"Irritability", q:"When it hurts, how long does it take to settle?", a:"If I push it too far, it throbs for an hour or two." },
-    { dim:"Nature", q:"Describe the pain — sharp, dull, pressure, any numbness?", a:"Mostly a tight, pressured feeling around the kneecap. No numbness or shooting pain." },
-    { dim:"Stability", q:"Compared to last week, better, same, or worse?", a:"Better overall — swelling is down and I can bend it a little more." },
-    { dim:"Stage", q:"Remind me how long ago the surgery was?", a:"Ten days." },
-    { dim:"Screen", q:"Any new giving way, locking, fever, or calf pain?", a:"No giving way or locking. Everything seems normal." }
+  "interview": [
+    {
+      "dim": "Severity",
+      "q": "How would you rate your pain today?",
+      "a": "Maybe a 3/10 sitting but closer to 5/10 when I bend it past about 60 degrees."
+    },
+    {
+      "dim": "Irritability",
+      "q": "When it hurts how long does it take to settle?",
+      "a": "It takes about 20 minutes of bending the knee to noticeably aggravate the knee, but 20 minutes of rest and elevation to return to baseline."
+    },
+    {
+      "dim": "Nature",
+      "q": "Describe the pain — sharp dull pressure any numbness?",
+      "a": "Mostly a tight pressured feeling around the kneecap. No numbness or shooting pain."
+    },
+    {
+      "dim": "Stability",
+      "q": "Compared to last week better same or worse?",
+      "a": "Better overall — swelling is down and I can bend it a little more."
+    },
+    {
+      "dim": "Stage",
+      "q": "Remind me how long ago the surgery was?",
+      "a": "Ten days."
+    },
+    {
+      "dim": "Screen",
+      "q": "Any new giving way locking fever or calf pain?",
+      "a": "No giving way or locking. Everything seems normal."
+    }
   ],
-  sinss: [
-    { letter:"S", key:"Severity", prompt:"How severe is the pain today?", options:["Mild (0–3/10)","Moderate (4–6/10)","Severe (7–10/10)"], correct:"Moderate (4–6/10)", why:"Pain is 3/10 sitting but 5/10 with flexion past 60°, placing it squarely in the moderate range." },
-    { letter:"I", key:"Irritability", prompt:"How irritable is the condition?", options:["Low","Moderate","High"], correct:"Moderate", why:"Pain increases with movement and takes 1–2 hours to settle — hallmark of moderate irritability." },
-    { letter:"N", key:"Nature", prompt:"What is the nature of the pain?", options:["Nociceptive","Neuropathic","Nociplastic"], correct:"Nociceptive", why:"Post-surgical mechanical pain with swelling, no neurological signs — clearly nociceptive." },
-    { letter:"S", key:"Stability", prompt:"How is the condition progressing?", options:["Improving","Same","Worsening"], correct:"Improving", why:"Swelling is decreasing and ROM is increasing — solid trajectory for 10 days post-op." },
-    { letter:"S", key:"Stage", prompt:"What stage is the condition?", options:["Acute (1–14 days)","Subacute (2–6 wks)","Chronic (> 6 wks)"], correct:"Acute (1–14 days)", why:"Ten days post-op falls squarely in the acute healing phase." }
+  "sinss": [
+    {
+      "letter": "S",
+      "key": "Severity",
+      "prompt": "How severe is the pain today?",
+      "options": [
+        "Low (0-3/10)",
+        "Moderate (4-6/10)",
+        "High (7-10/10)"
+      ],
+      "correct": "Moderate (4-6/10)",
+      "why": "Pain is 3/10 sitting but 5/10 with movement past 60° ” this falls squarely in moderate range."
+    },
+    {
+      "letter": "I",
+      "key": "Irritability",
+      "prompt": "How irritable is the condition?",
+      "options": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "correct": "Moderate",
+      "why": "Symptoms take about 20 minutes to aggravate and about 20 minutes to ease, indicating moderate irritability."
+    },
+    {
+      "letter": "N",
+      "key": "Nature",
+      "prompt": "What is the nature of the pain?",
+      "options": [
+        "Nociceptive",
+        "Neuropathic",
+        "Nociplastic"
+      ],
+      "correct": "Nociceptive",
+      "why": "Post-surgical mechanical pain with swelling and limited ROM — pure nociceptive."
+    },
+    {
+      "letter": "S",
+      "key": "Stability",
+      "prompt": "How is the condition progressing?",
+      "options": [
+        "Improving",
+        "Same",
+        "Worsening"
+      ],
+      "correct": "Improving",
+      "why": "Swelling is decreasing and ROM is increasing — clear progress."
+    },
+    {
+      "letter": "S",
+      "key": "Stage",
+      "prompt": "What stage is the condition?",
+      "options": [
+        "Acute (1–14 days)",
+        "Subacute (2–6 wks)",
+        "Chronic (> 6 wks)"
+      ],
+      "correct": "Acute (1–14 days)",
+      "why": "Ten days post-op falls within the acute window and requires protection."
+    }
   ],
-  interventions: {
-    prompt: "Choose only the interventions appropriate for a 10‑day post‑op ACL reconstruction with moderate severity, moderate irritability, improving stability, and acute stage.",
-    items: [
-      { label:"Cryotherapy and compression", verdict:"perform", why:"Edema control is essential in the acute post-op phase and well tolerated." },
-      { label:"Heel slides within tolerance (no forced flexion)", verdict:"perform", why:"Protected ROM is appropriate; avoid aggressive flexion that increases irritability." },
-      { label:"Quad sets + NMES", verdict:"perform", why:"Quad activation is a priority at this stage; safe and necessary." },
-      { label:"Straight-leg raises with brace locked", verdict:"perform", why:"SLR is safe if the brace is locked and quad activation is maintained." },
-      { label:"Open-chain knee extension 40–0°", verdict:"hold", why:"Contraindicated early post-op due to graft strain in terminal extension." },
-      { label:"Closed-chain strengthening beyond 45° flexion", verdict:"hold", why:"Deep flexion increases graft strain and anterior shear forces at this stage." },
-      { label:"Jogging or impact drills", verdict:"hold", why:"Impact loading is contraindicated in the acute phase and far too early at 10 days." }
+  "interventions": {
+    "prompt": "Choose only the interventions appropriate for a 10-day post-op ACL reconstruction with moderate severity, moderate irritability, improving stability, and acute stage.",
+    "items": [
+      {
+        "label": "Cryotherapy and compression",
+        "verdict": "perform",
+        "why": "Edema control is essential in the acute post-op phase and well tolerated."
+      },
+      {
+        "label": "Heel slides within tolerance (no forced flexion)",
+        "verdict": "perform",
+        "why": "Protected ROM is appropriate; avoid aggressive flexion that increases irritability."
+      },
+      {
+        "label": "Quad sets + NMES",
+        "verdict": "perform",
+        "why": "Quad activation is a priority at this stage; safe and necessary."
+      },
+      {
+        "label": "Straight-leg raises with brace locked",
+        "verdict": "perform",
+        "why": "SLR is safe if the brace is locked and quad activation is maintained."
+      },
+      {
+        "label": "Open-chain knee extension 40–0°",
+        "verdict": "hold",
+        "why": "Contraindicated early post-op due to graft strain in terminal extension."
+      },
+      {
+        "label": "Closed-chain strengthening beyond 45° flexion",
+        "verdict": "hold",
+        "why": "Deep flexion increases graft strain and anterior shear forces at this stage."
+      },
+      {
+        "label": "Jogging or impact drills",
+        "verdict": "hold",
+        "why": "Impact loading is contraindicated in the acute phase and far too early at 10 days."
+      }
     ]
   },
-  expert: {
-    heading: "How the reasoning fits together",
-    paragraphs: [
-      "At 10 days post-op, the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling or provokes prolonged pain.",
+  "expert": {
+    "heading": "How the reasoning fits together",
+    "paragraphs": [
+      "At 10 days post-op the graft is vulnerable and the knee is still in the acute healing stage. Moderate irritability means you must respect symptoms and avoid anything that increases swelling. The patient is trending better which is encouraging but not permission to progress into stressful ranges yet.",
       "Quad activation and protected ROM are the highest priorities. Avoid open-chain terminal extension and deep closed-chain flexion — both increase anterior shear forces on the graft."
     ]
   }
